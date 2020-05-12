@@ -57,7 +57,7 @@ mqttc.on_publish = on_publish
 mqttc.connect(MQTT_Broker, int(MQTT_Port), int(Keep_alive_interval))
 
 break_program = False
-host = '192.168.0.102'
+host = ''
 port = 5555
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
