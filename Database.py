@@ -1,7 +1,7 @@
 import json
 import sqlite3
 
-DB_Name="IoT_DataBase.db"
+DB_Name="IotDatabase"
 
 
 class DataBaseManager():
