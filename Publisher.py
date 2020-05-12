@@ -71,9 +71,9 @@ def publishDataToMqtt():
         tmpData = {}
         tmpData['SensorId'] = "Temeperature-sensor1"
         tmpData['Date'] = (datetime.today()).strftime("%d-%b-%Y %H:%M:%S:%f")
-        tmpData['HumidityLevel'] = getHumidityLevel(tmpValue)
+        tmpData['TempLevel'] = getTempLevel(tmpValue)
         tmpJsonData = json.dumps(tmpData)
-        print("Publish humidity data" + str(tmpData))
+        print("Publish Temp data" + str(tmpData))
         publishToTopic(MQTT_Topic_Humidity, tmpJsonData)
         toggle=0
 
