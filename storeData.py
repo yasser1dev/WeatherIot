@@ -1,7 +1,7 @@
 import json
 import sqlite3
 
-DB_Name="IotDatabase"
+DB_Name="IoT_DataBase.db"
 
 
 class DataBaseManager():
@@ -35,3 +35,53 @@ class DataBaseManager():
         del dbObj
         return rows
 
+def Temperature_Data_Handler(jsonData):
+    json_Dict=json.loads(jsonData)
+    SensorID = json_Dict['Sensor_ID']
+    Date_Time = json_Dict['Date']
+    Temperature = float(json_Dict['Temperature'])
+    TemperatureLevel = json_Dict['TemperatureLevel']
+
+    dbObj = DataBaseManager()
+    dbObj.add_del_update_db_record("insert into Temperature_Data(SensorID,Date_Time,Temperature,TemperatureLevel) values (?,?,?,?)",[SensorID,Date_Time,Temperature,TemperatureLevel])
+    del dbObj
+    print("Inserted Temperature Data into Database")
+    print("")
+
+def Humidity_Data_Handler(jsonData):
+    json_Dict = json.loads(jsonData)
+    SensorID = json_Dict['Sensor_ID']
+    Date_Time = json_Dict['Date']
+    Humidity = float(json_Dict['Humidity'])
+    HumidityLevel = json_Dict['HumidityLevel']
+
+    dbObj = DataBaseManager()
+    dbObj.add_del_update_db_record("insert into Humidity_Data(SensorID,Date_Time,Humidity,HumidityLevel) values (?,?,?,?)",[SensorID,Date_Time,Humidity,HumidityLevel])
+    del dbObj
+    print("Inserted Humidity Data into Database.")
+    print("")
+
+def Acceleration_Data_Handler(jsonData):
+    json_Dict = json.loads(jsonData)
+    SensorID = json_Dict['Sensor_ID']
+    Date_Time = json_Dict['Date']
+    print('******************',Date_Time)
+    accX = float(json_Dict['accX'])
+    accY = float(json_Dict['accY'])
+    accZ = float(json_Dict['accZ'])
+
+    dbObj = DataBaseManager()
+    dbObj.add_del_update_db_record("insert into Acceleration_Data(SensorID,Date_Time,accX,accY,accZ) values (?,?,?,?,?)",[SensorID,Date_Time,accX,accY,accZ])
+    del  dbObj
+    print("Inserted Acceleration Data into Database")
+    print("")
+
+
+
+def sensor_Data_Handler(Topic,jsonData):
+    if Topic == "Home/BedRoom/DHT1/Temperature":
+        Temperature_Data_Handler(jsonData)
+    elif Topic == "Home/BedRoom/DHT1/humidity":
+        Humidity_Data_Handler(jsonData)
+    elif Topic == "Home/BedRoom/DHT1/Acceleration":
+        Acceleration_Data_Handler(jsonData)
