@@ -59,9 +59,11 @@ def data_processing(data):
 processed_data = data_processing(data)
 date_time_per_minute=[]
 temperature_val=[]
+tmpDescription=[]
 for i in range(len(processed_data)):
     date_time_per_minute.append(processed_data[i][0])
     temperature_val.append(processed_data[i][1])
+    tmpDescription.append(data[i][-1])
 
 # In[6]:
 
@@ -77,4 +79,27 @@ ax.set(xlabel='date time per minute', ylabel='temperature',
 ax.grid()
 
 fig.savefig("temperature_viz.png")
+plt.show()
+
+# In[7]:
+
+
+prcnt=[]
+prcnt.append(tmpDescription.count('very cold')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('cold')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('normal')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('hot')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('very hot')*len(tmpDescription)/100)
+
+# In[8]:
+
+
+labels = ['very cold','cold', 'normal', 'hot', 'very hot']
+sizes = prcnt
+explode = (0, 0.1, 0, 0,0)
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90)
+ax1.axis('equal')
 plt.show()
