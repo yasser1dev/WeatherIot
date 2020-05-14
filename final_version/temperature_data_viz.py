@@ -60,10 +60,11 @@ processed_data = data_processing(data)
 date_time_per_minute=[]
 temperature_val=[]
 tmpDescription=[]
+for i in range(len(data)):
+    tmpDescription.append(data[i][-1])
 for i in range(len(processed_data)):
     date_time_per_minute.append(processed_data[i][0])
     temperature_val.append(processed_data[i][1])
-    tmpDescription.append(data[i][-1])
 
 # In[6]:
 
@@ -85,11 +86,11 @@ plt.show()
 
 
 prcnt=[]
-prcnt.append(tmpDescription.count('very cold')*len(tmpDescription)/100)
-prcnt.append(tmpDescription.count('cold')*len(tmpDescription)/100)
-prcnt.append(tmpDescription.count('normal')*len(tmpDescription)/100)
-prcnt.append(tmpDescription.count('hot')*len(tmpDescription)/100)
-prcnt.append(tmpDescription.count('very hot')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('VERY COLD')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('COLD')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('NORMAL')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('HOT')*len(tmpDescription)/100)
+prcnt.append(tmpDescription.count('VERY HOT')*len(tmpDescription)/100)
 
 # In[8]:
 
