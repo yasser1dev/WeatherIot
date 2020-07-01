@@ -20,9 +20,9 @@ def mapMsgToJson(msg,addr):
     lst = re.split("[,\"]",str(msg))
     dic['sensor_id'] = 'Accelerometer '+str(addr)
     dic['date_time'] = (datetime.today()).strftime("%d-%b-%Y %H:%M:%S:%f")
-    dic['accX'] = lst[3].strip()
-    dic['accY'] = lst[4].strip()
-    dic['accA'] = lst[5].strip()
+    dic['accX'] = float(lst[3].strip())
+    dic['accY'] = float(lst[4].strip())
+    dic['accZ'] = float(lst[5].strip())
     return json.dumps(dic)
 
 def on_connect(client, userdata ,rc):
